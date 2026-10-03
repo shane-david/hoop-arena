@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a588dab5448f34980f0e0448e3babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketBallHandler
-  _destroyDelay: 0
+  _destroyDelay: 5
 --- !u!135 &8255073773112708818
 SphereCollider:
   m_ObjectHideFlags: 0
