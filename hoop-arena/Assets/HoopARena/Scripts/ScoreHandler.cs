@@ -9,6 +9,13 @@ public class ScoreHandler : MonoBehaviour
     public int Score;
 
 
+    private void Start()
+    {
+        Score = 0;
+        
+    }
+
+
     //If a ball leaves the hitbox of this collider, then update the score.
     private void OnTriggerExit(Collider collision)
     {
