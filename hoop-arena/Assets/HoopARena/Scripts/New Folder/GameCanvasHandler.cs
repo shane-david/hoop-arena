@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameCanvasHandler : MonoBehaviour
@@ -7,7 +8,7 @@ public class GameCanvasHandler : MonoBehaviour
     [SerializeField] private Camera arCamera;
     [SerializeField] private GameObject ballPrefab;
 
-    [SerializeField] private float distanceFromCamera = 0.5f;
+    [SerializeField] private float distanceFromCamera = 1f;
 
     [Header("Game State")]
     [SerializeField] private GameObject reloadButton;
@@ -18,13 +19,15 @@ public class GameCanvasHandler : MonoBehaviour
 
     void OnEnable()
     {
-        
+        TouchInputHandler.OnTouchBegan += BallCheck;
+        BasketBallHandler.WhenDestroyed += ResetBall;
     }
 
 
     void OnDisable()
     {
-        
+        TouchInputHandler.OnTouchBegan -= BallCheck;
+        BasketBallHandler.WhenDestroyed -= ResetBall;
     }
 
     void Start()
@@ -33,13 +36,13 @@ public class GameCanvasHandler : MonoBehaviour
     }
 
 
-    public void SpawnBall()
+    public void SpawnBall(Vector2 mousePOS)
     {
         // Get the center of the spawn button in screen coordinates.
         Vector2 screenPosition =
             RectTransformUtility.WorldToScreenPoint(
-                null,
-                
+                null, mousePOS
+
             );
 
 
@@ -75,32 +78,27 @@ public class GameCanvasHandler : MonoBehaviour
         }
 
 
-        // Hide the spawn button.
-        spawnButton.gameObject.SetActive(false);
+        
     }
 
-
-    public void ReloadGame()
+    public void ResetBall()
     {
-        Destroy(_currentBall);
-
-        reloadButton.SetActive(false);
-        spawnHandler.ResetEncounter();
-
-        // SceneManager.LoadScene("MainMenu");
+        _currentBall = null; 
     }
-
-
-    private void DisplaySpawnButton()
+    
+    public void BallCheck(Vector2 POS)
     {
-        spawnButton.gameObject.SetActive(true);
+        if ( _currentBall == null )
+        {
+            SpawnBall(POS);
+        }
+        else
+        {
+            return;
+        }
     }
 
-
-    private void DisplayGameReloadButton()
-    {
-        reloadButton.gameObject.SetActive(true);
-    }
+    
 
 
     

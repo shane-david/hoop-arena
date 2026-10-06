@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8255073773112708818}
   - component: {fileID: 2921306591162114003}
   - component: {fileID: 7166716576231745571}
+  - component: {fileID: -7295060752973724093}
   m_Layer: 0
   m_Name: obj_BasketBall
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.012, y: 2.337, z: 0.28}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a588dab5448f34980f0e0448e3babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketBallHandler
-  _destroyDelay: 5
+  _destroyDelay: 4
 --- !u!135 &8255073773112708818
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +155,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8941389377958070899}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-7295060752973724093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8941389377958070899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e59b52ee3d691e44aaf0aff64acb3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallFlickHandler
+  ballRigidbody: {fileID: 4877572995023020828}
+  aimDistance: 0.5
+  throwMultiplier: 0.01
+  minimumThrowForce: 3
+  maximumThrowForce: 10
+  horizontalInfluence: 0.5
+  upwardInfluence: 0.25

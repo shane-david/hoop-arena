@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 //Written by Zachary
 //The basketball handler manages when a basketball should be deleted
@@ -9,6 +10,8 @@ public class BasketBallHandler : MonoBehaviour
     /// Controls the amount of time until the ball destroys itself
     /// </summary>
     [SerializeField] private float _destroyDelay;
+
+    public static Action WhenDestroyed;
 
     private void Start()
     {
@@ -32,6 +35,7 @@ public class BasketBallHandler : MonoBehaviour
     }
     private void DestroySelf()
     {
-        Destroy(this);
+        WhenDestroyed?.Invoke();
+        Destroy(this.gameObject);
     }
 }
