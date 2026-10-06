@@ -13,7 +13,7 @@ public class UIHandler : MonoBehaviour
 
 
     //Time section
-    private float timeRemaining = 8f;
+    private float timeRemaining = 120f;
     private bool timerPaused = true;
 
     private void OnEnable()

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.012, y: 2.337, z: 0.28}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -172,5 +172,5 @@ MonoBehaviour:
   throwMultiplier: 0.01
   minimumThrowForce: 3
   maximumThrowForce: 10
-  horizontalInfluence: 0.5
-  upwardInfluence: 0.25
+  horizontalInfluence: 0.25
+  upwardInfluence: 1

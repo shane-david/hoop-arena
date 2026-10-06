@@ -20,14 +20,14 @@ public class GameCanvasHandler : MonoBehaviour
     void OnEnable()
     {
         TouchInputHandler.OnTouchBegan += BallCheck;
-        BasketBallHandler.WhenDestroyed += ResetBall;
+        BallFlickHandler.Released += ResetTrackedBall;
     }
 
 
     void OnDisable()
     {
         TouchInputHandler.OnTouchBegan -= BallCheck;
-        BasketBallHandler.WhenDestroyed -= ResetBall;
+        BallFlickHandler.Released -= ResetTrackedBall;
     }
 
     void Start()
@@ -81,9 +81,13 @@ public class GameCanvasHandler : MonoBehaviour
         
     }
 
-    public void ResetBall()
+    public void ResetTrackedBall()
     {
-        _currentBall = null; 
+        //reset the parent of the object
+        _currentBall.transform.parent = null; 
+        
+        //Untrack the ball
+        _currentBall = null;
     }
     
     public void BallCheck(Vector2 POS)

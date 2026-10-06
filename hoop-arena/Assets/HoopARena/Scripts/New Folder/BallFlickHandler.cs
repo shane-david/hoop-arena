@@ -21,6 +21,8 @@ public class BallFlickHandler : MonoBehaviour
     private Camera _arCamera;
     private bool _isDragging;
 
+    public static Action Released;
+
     void OnEnable()
     {
         TouchInputHandler.OnTouchBegan += StartDrag;
@@ -117,5 +119,7 @@ public class BallFlickHandler : MonoBehaviour
             throwDirection * throwForce,
             ForceMode.Impulse
         );
+
+        Released?.Invoke();
     }
 }
