@@ -6,14 +6,15 @@ using System;
 //The UI handler will update and manage the UI whenever it updates.
 public class UIHandler : MonoBehaviour
 {
+
+    [Header("Object References")]
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _timerText;
 
-    [Header("Object References")]
-    
 
-    private int scoreValue = 0;
-    private int timer;
+    //Time section
+    private float timeRemaining = 8f;
+    private bool timerPaused = true;
 
     private void OnEnable()
     {
@@ -25,12 +26,46 @@ public class UIHandler : MonoBehaviour
         EventHandler.OnScoreUpdated -= UpdateScore;
     }
 
-
-    public void UpdateScore(int newscore)
+    private void Start()
     {
-        scoreValue = newscore;
-
-        _scoreText.text = $"Score: {scoreValue}";
+        //Start the timer
+        timerPaused = false;
+    }
+    private void Update()
+    {
+        if (timerPaused != true) UpdateTimer();
     }
 
+    #region methods
+    public void UpdateScore(int newscore)
+    { 
+        _scoreText.text = $"Score: {newscore}";
+    }
+
+    private void UpdateTimer()
+    {
+        if (timeRemaining <= 0f)
+        {
+            timerPaused = true;
+
+            //Stop the player shooting
+            EventHandler.StopPlayerShooting();
+
+            _timerText.text = "0:00 :Time";
+            return;
+        }
+        timeRemaining -= Time.deltaTime;
+
+
+        _timerText.text = string.Format("{0:0}:{1:00} :Time", 
+                                        Mathf.FloorToInt(timeRemaining / 60), 
+                                        Mathf.FloorToInt(timeRemaining % 60));
+    }
+
+    public void PauseResumeTimer()
+    {
+        //Timer paused is now equal to the opposite state
+        timerPaused = !timerPaused;
+    }
+#endregion
 }
