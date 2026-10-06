@@ -37,7 +37,7 @@ public class SpawnHandler : MonoBehaviour
     private void SpawnModel(ARTrackedImage image)
     {
         GameObject modelInstance = Instantiate(_hoopPrefab, image.transform);
-        modelInstance.transform.localPosition = Vector3.zero; 
-        modelInstance.transform.localRotation = Quaternion.Euler(0, 180, 0);  
+        modelInstance.transform.localPosition = new Vector3(-0.5f, 0.15f, 0);
+        modelInstance.transform.localRotation = Quaternion.Euler(-90, 180, 90);  
     }
 }
