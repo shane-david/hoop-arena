@@ -5,21 +5,40 @@ using System;
 //The job of the score handler is to keep track and update the player's score.
 public class ScoreHandler : MonoBehaviour
 {
-    //variables to keep track of 
-    public int Score;
 
-    
+    // get a reference to the camera so that we can determine the player's distance 
+    [SerializeField] Camera _arCamera; 
+
+    //variables to keep track of score 
+    public float BaseScoreAddition = 1f;
+    public float ScoreMultiplier = 3f; 
+
+    // variable for current score
+    private int _currentScoreAddition; 
+
+    // the player's actual score 
+    private int _currentScore; 
 
     //This event will be called when this object is created
     //The UI handler will be listening for this event to get 
     //the correct reference to this object.
     public event Action Created;
+
     private void Start()
     {
-        Score = 0;
-        EventHandler.ScoreUpdated(Score);
+        if (_arCamera == null)
+        {
+            _arCamera = Camera.main; 
+        }
+
+        _currentScore = 0; 
+        EventHandler.ScoreUpdated(_currentScore);
     }
 
+    private void Update()
+    {
+        DetermineDistance(); 
+    }
 
     //If a ball leaves the hitbox of this collider, then update the score.
     private void OnTriggerExit(Collider collision)
@@ -30,14 +49,23 @@ public class ScoreHandler : MonoBehaviour
         //if the collided object has the basketballhandler script, score a point
         if (collision.gameObject.GetComponent<BasketBallHandler>())
         {
-            Score += 1;
+            _currentScore += _currentScoreAddition;
             //Call the event with the updated value
-            EventHandler.ScoreUpdated(Score);
+            EventHandler.ScoreUpdated(_currentScore);
         }
     }
 
-     
+    private void DetermineDistance()
+    {
+        // make sure the ar camera is not null 
+        if (_arCamera == null) return; 
 
-    
+        // find the distance 
+        float distance = Vector3.Distance(_arCamera.transform.position, this.transform.position);
 
+        // set score based on distance 
+        float unrounded = BaseScoreAddition * Mathf.Pow(distance, ScoreMultiplier); 
+        _currentScoreAddition = Mathf.RoundToInt(unrounded); 
+        Debug.Log(_currentScoreAddition); 
+    }
 }
