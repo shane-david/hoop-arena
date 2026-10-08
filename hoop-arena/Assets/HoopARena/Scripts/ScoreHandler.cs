@@ -22,7 +22,7 @@ public class ScoreHandler : MonoBehaviour
     //This event will be called when this object is created
     //The UI handler will be listening for this event to get 
     //the correct reference to this object.
-    public event Action Created;
+    //public event Action Created;
 
     private void OnEnable()
     {
@@ -60,6 +60,10 @@ public class ScoreHandler : MonoBehaviour
         if (collision.gameObject.GetComponent<BasketBallHandler>())
         {
             _currentScore += _currentScoreAddition;
+
+            // call this event to display the score to screen
+            EventHandler.ScoreAmountDetermined(_currentScoreAddition); 
+
             //Call the event with the updated value
             EventHandler.ScoreUpdated(_currentScore);
         }

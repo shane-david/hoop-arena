@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class BallFlickHandler : MonoBehaviour
 {
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _soundClip; 
+
     [Header("References")]
     [SerializeField] private Rigidbody ballRigidbody;
 
@@ -80,6 +84,9 @@ public class BallFlickHandler : MonoBehaviour
 
     private void ReleaseBall(Vector2 screenPosition)
     {
+        // play the throw sound 
+        _audioSource.PlayOneShot(_soundClip); 
+
         if (!_isDragging)
             return;
 
