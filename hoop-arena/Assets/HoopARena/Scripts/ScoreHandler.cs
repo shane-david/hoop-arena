@@ -24,6 +24,16 @@ public class ScoreHandler : MonoBehaviour
     //the correct reference to this object.
     public event Action Created;
 
+    private void OnEnable()
+    {
+        UIHandler.ResetGame += ResetScore;
+    }
+
+    private void OnDisable()
+    {
+        UIHandler.ResetGame -= ResetScore;
+    }
+
     private void Start()
     {
         if (_arCamera == null)
@@ -67,5 +77,10 @@ public class ScoreHandler : MonoBehaviour
         float unrounded = BaseScoreAddition * Mathf.Pow(distance, ScoreMultiplier); 
         _currentScoreAddition = Mathf.RoundToInt(unrounded); 
         Debug.Log(_currentScoreAddition); 
+    }
+
+    private void ResetScore()
+    {
+        _currentScore = 0;
     }
 }

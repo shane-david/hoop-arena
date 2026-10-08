@@ -10,17 +10,18 @@ public class GameCanvasHandler : MonoBehaviour
 
     [SerializeField] private float distanceFromCamera = 1f;
 
-    [Header("Game State")]
-    [SerializeField] private GameObject reloadButton;
-    [SerializeField] private SpawnHandler spawnHandler;
 
     private GameObject _currentBall;
+
+    public bool timeOut = false;
 
 
     void OnEnable()
     {
         TouchInputHandler.OnTouchBegan += BallCheck;
         BallFlickHandler.Released += ResetTrackedBall;
+        EventHandler.OnStopPlayerShooting += TimeOut;
+        UIHandler.ResetGame += Reset;
     }
 
 
@@ -28,6 +29,7 @@ public class GameCanvasHandler : MonoBehaviour
     {
         TouchInputHandler.OnTouchBegan -= BallCheck;
         BallFlickHandler.Released -= ResetTrackedBall;
+        EventHandler.OnStopPlayerShooting -= TimeOut;
     }
 
     void Start()
@@ -92,7 +94,7 @@ public class GameCanvasHandler : MonoBehaviour
     
     public void BallCheck(Vector2 POS)
     {
-        if ( _currentBall == null )
+        if ( _currentBall == null && timeOut == false)
         {
             SpawnBall(POS);
         }
@@ -102,8 +104,15 @@ public class GameCanvasHandler : MonoBehaviour
         }
     }
 
-    
+    public void TimeOut()
+    {
+        timeOut = !timeOut;
+    }
+
+    public void Reset()
+    {
+        timeOut = false;
+    }
 
 
-    
 }
