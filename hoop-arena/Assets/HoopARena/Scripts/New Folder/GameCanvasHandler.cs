@@ -30,6 +30,7 @@ public class GameCanvasHandler : MonoBehaviour
         TouchInputHandler.OnTouchBegan -= BallCheck;
         BallFlickHandler.Released -= ResetTrackedBall;
         EventHandler.OnStopPlayerShooting -= TimeOut;
+        UIHandler.ResetGame -= Reset;
     }
 
     void Start()
