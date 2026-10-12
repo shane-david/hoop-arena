@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1018526953624777829}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: ResetGame
+        m_MethodName: OnResetGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -780,6 +780,8 @@ GameObject:
   - component: {fileID: 2961920031155162809}
   - component: {fileID: 859819432708610621}
   - component: {fileID: 1018526953624777829}
+  - component: {fileID: 7860990138334064566}
+  - component: {fileID: 6653740029865079219}
   m_Layer: 5
   m_Name: canvas_MainUI
   m_TagString: Untagged
@@ -887,3 +889,34 @@ MonoBehaviour:
   _scoreText: {fileID: 4704282430655183543}
   _timerText: {fileID: 8203191613525578549}
   _resetButton: {fileID: 7124037680109668474}
+--- !u!114 &7860990138334064566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445208710177679409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07b79c8d3c7f4fc18c6b2fa708e08ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameCanvasHandler
+  arCamera: {fileID: 0}
+  ballPrefab: {fileID: 8941389377958070899, guid: 5e993484151cb464b9fb1f9507986f16, type: 3}
+  distanceFromCamera: 0.5
+  timeOut: 0
+--- !u!114 &6653740029865079219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445208710177679409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594106e50a6325c45ae01b29b20aaed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScorePopup
+  _parentCanvas: {fileID: 1921897732988595658}
+  _scorePrefab: {fileID: 7675741004550748599, guid: 7f8a6aeefeda8e647ab1447519553da8, type: 3}
+  _lifetime: 1
