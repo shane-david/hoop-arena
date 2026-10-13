@@ -34,39 +34,25 @@ public class ScoreHandler : MonoBehaviour
 
     [SerializeField] private ParticleSystem _onScoreParticles;
 
+    public static Action OnGameStart;
+
     private void OnEnable()
     {
         UIHandler.ResetGame += OnReset;
         EventHandler.OnScoreUpdated += UpdateScore;
+        ScoreHandler.OnGameStart += GameStart;
     }
 
     private void OnDisable()
     {
         UIHandler.ResetGame -= OnReset;
         EventHandler.OnScoreUpdated -= UpdateScore;
+        ScoreHandler.OnGameStart -= GameStart;
     }
 
     private void Start()
     {
-        if (_arCamera == null)
-        {
-            _arCamera = Camera.main;
-        }
-
-        if (scoreText == null)
-        {
-            scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshPro>();
-        }
-
-        if (timerText == null)
-        {
-            timerText = GameObject.Find("TimerText").GetComponent<TextMeshPro>();
-        }
-
-        _currentScore = 0;
-        EventHandler.ScoreUpdated(_currentScore);
-
-        timerPaused = false;
+        OnGameStart?.Invoke();
     }
 
     private void Update()
@@ -152,5 +138,30 @@ public class ScoreHandler : MonoBehaviour
     {
         //Timer paused is now equal to the opposite state
         timerPaused = !timerPaused;
+    }
+
+    public void GameStart()
+    {
+        if (_arCamera == null)
+        {
+            _arCamera = Camera.main;
+        }
+
+        if (scoreText == null)
+        {
+            scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshPro>();
+        }
+
+        if (timerText == null)
+        {
+            timerText = GameObject.Find("TimerText").GetComponent<TextMeshPro>();
+        }
+
+        timeRemaining = 70f;
+
+        _currentScore = 0;
+        EventHandler.ScoreUpdated(_currentScore);
+
+        timerPaused = false;
     }
 }
