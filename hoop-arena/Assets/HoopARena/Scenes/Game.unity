@@ -306,47 +306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1180218670 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8445208710177679409, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
-  m_PrefabInstance: {fileID: 1674206819}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1180218671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180218670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07b79c8d3c7f4fc18c6b2fa708e08ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameCanvasHandler
-  arCamera: {fileID: 2512387468973847745}
-  ballPrefab: {fileID: 8941389377958070899, guid: 5e993484151cb464b9fb1f9507986f16, type: 3}
-  distanceFromCamera: 0.5
-  timeOut: 0
---- !u!223 &1180218675 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 1921897732988595658, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
-  m_PrefabInstance: {fileID: 1674206819}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1180218677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180218670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594106e50a6325c45ae01b29b20aaed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScorePopup
-  _parentCanvas: {fileID: 1180218675}
-  _scorePrefab: {fileID: 7675741004550748599, guid: 7f8a6aeefeda8e647ab1447519553da8, type: 3}
-  _lifetime: 1
 --- !u!1 &1365647881
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,10 +443,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7124037680109668474, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnResetGame
-      objectReference: {fileID: 0}
+    - target: {fileID: 5159169737057974367, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
+      propertyPath: arCamera
+      value: 
+      objectReference: {fileID: 2512387468973847745}
     - target: {fileID: 7538619139254024747, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -575,13 +534,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8445208710177679409, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1180218671}
-    - targetCorrespondingSourceObject: {fileID: 8445208710177679409, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1180218677}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab41549731c62aa45bd85f178915fc9b, type: 3}
 --- !u!4 &1765540924 stripped
 Transform:
