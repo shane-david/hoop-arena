@@ -304,6 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2958078533688385228}
+  - component: {fileID: -6089972743616077300}
   m_Layer: 0
   m_Name: basketballNet
   m_TagString: Untagged
@@ -329,6 +330,19 @@ Transform:
   - {fileID: 2077102247171561707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6089972743616077300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935778522622983565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2bf1a0ac716be428abeae2dc343775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rotator
+  _speed: 45
 --- !u!1 &5023560705794622838
 GameObject:
   m_ObjectHideFlags: 0
