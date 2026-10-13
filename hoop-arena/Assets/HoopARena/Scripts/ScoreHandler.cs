@@ -14,11 +14,13 @@ public class ScoreHandler : MonoBehaviour
     public float BaseScoreAddition = 1f;
     public float ScoreMultiplier = 3f;
 
-    // variable for current score
+    // variable for current score multiplier based on distance
     private int _currentScoreAddition;
 
     // the player's actual score 
     private int _currentScore;
+
+    private int _streakTotal;
 
     //This event will be called when this object is created
     //The UI handler will be listening for this event to get 
@@ -34,6 +36,8 @@ public class ScoreHandler : MonoBehaviour
 
     [SerializeField] private ParticleSystem _onScoreParticles;
 
+    [SerializeField] private ParticleSystem[] _fireParticles;
+
     public static Action OnGameStart;
 
     private void OnEnable()
@@ -41,6 +45,7 @@ public class ScoreHandler : MonoBehaviour
         UIHandler.ResetGame += OnReset;
         EventHandler.OnScoreUpdated += UpdateScore;
         ScoreHandler.OnGameStart += GameStart;
+        BasketBallHandler.WhenDestroyed += ResetStreak;
     }
 
     private void OnDisable()
@@ -48,6 +53,7 @@ public class ScoreHandler : MonoBehaviour
         UIHandler.ResetGame -= OnReset;
         EventHandler.OnScoreUpdated -= UpdateScore;
         ScoreHandler.OnGameStart -= GameStart;
+        BasketBallHandler.WhenDestroyed -= ResetStreak;
     }
 
     private void Start()
@@ -70,6 +76,11 @@ public class ScoreHandler : MonoBehaviour
         //if the collided object has the basketballhandler script, score a point
         if (collision.gameObject.GetComponent<BasketBallHandler>())
         {
+            //add 1 to the total streak value
+            _streakTotal += 1;
+
+            _currentScoreAddition = ScoreStreak();
+
             _currentScore += _currentScoreAddition;
 
             // call this event to display the score to screen
@@ -78,7 +89,11 @@ public class ScoreHandler : MonoBehaviour
             //Call the event with the updated value
             EventHandler.ScoreUpdated(_currentScore);
 
+            //Play a one shot of the particles
             _onScoreParticles.Play();
+
+            //Destroy the basket ball
+            Destroy(collision.gameObject);
         }
     }
 
@@ -93,9 +108,10 @@ public class ScoreHandler : MonoBehaviour
         // set score based on distance 
         float unrounded = BaseScoreAddition * Mathf.Pow(distance, ScoreMultiplier);
         _currentScoreAddition = Mathf.RoundToInt(unrounded);
-        Debug.Log(_currentScoreAddition);
+        //Debug.Log(_currentScoreAddition);
     }
 
+    #region UI region
     private void OnReset()
     {
         //reset the score to 0
@@ -139,7 +155,7 @@ public class ScoreHandler : MonoBehaviour
         //Timer paused is now equal to the opposite state
         timerPaused = !timerPaused;
     }
-
+    #endregion
     public void GameStart()
     {
         if (_arCamera == null)
@@ -163,5 +179,30 @@ public class ScoreHandler : MonoBehaviour
         EventHandler.ScoreUpdated(_currentScore);
 
         timerPaused = false;
+    }
+
+    private int ScoreStreak()
+    {
+        //If the streak amount is greater than 3, double the added score
+        if (_streakTotal > 3)
+        {
+            TriggerFireParticles();
+            return _currentScoreAddition * 2;
+        }
+        //Otherwise, return the original score.
+        return _currentScoreAddition;
+    }
+
+    private void ResetStreak()
+    {
+        _streakTotal = 0;
+    }
+
+    private void TriggerFireParticles()
+    {
+        foreach (ParticleSystem ps in _fireParticles)
+        {
+            ps.Play();
+        }
     }
 }
