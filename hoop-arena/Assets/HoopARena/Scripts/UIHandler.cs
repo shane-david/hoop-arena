@@ -20,25 +20,15 @@ public class UIHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.OnScoreUpdated += UpdateScore;
         EventHandler.OnStopPlayerShooting += ShowButton;
     }
 
     private void OnDisable()
     {
         EventHandler.OnStopPlayerShooting -= ShowButton;
-        EventHandler.OnScoreUpdated -= UpdateScore;
+
     }
 
-    private void Start()
-    {
-        //Start the timer
-        timerPaused = false;
-    }
-    private void Update()
-    {
-        if (timerPaused != true) UpdateTimer();
-    }
 
     #region methods
     public void UpdateScore(int newscore)
@@ -46,25 +36,7 @@ public class UIHandler : MonoBehaviour
         _scoreText.text = $"Score: {newscore}";
     }
 
-    private void UpdateTimer()
-    {
-        if (timeRemaining <= 0f)
-        {
-            timerPaused = true;
 
-            //Stop the player shooting
-            EventHandler.StopPlayerShooting();
-
-            _timerText.text = "0:00 :Time";
-            return;
-        }
-        timeRemaining -= Time.deltaTime;
-
-
-        _timerText.text = string.Format("{0:0}:{1:00} :Time", 
-                                        Mathf.FloorToInt(timeRemaining / 60), 
-                                        Mathf.FloorToInt(timeRemaining % 60));
-    }
 
     public void PauseResumeTimer()
     {
