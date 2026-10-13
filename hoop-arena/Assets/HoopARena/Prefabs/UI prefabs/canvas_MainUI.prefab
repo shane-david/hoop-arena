@@ -780,8 +780,8 @@ GameObject:
   - component: {fileID: 2961920031155162809}
   - component: {fileID: 859819432708610621}
   - component: {fileID: 1018526953624777829}
-  - component: {fileID: 7860990138334064566}
-  - component: {fileID: 6653740029865079219}
+  - component: {fileID: 5159169737057974367}
+  - component: {fileID: 7200491646157244293}
   m_Layer: 5
   m_Name: canvas_MainUI
   m_TagString: Untagged
@@ -889,7 +889,7 @@ MonoBehaviour:
   _scoreText: {fileID: 4704282430655183543}
   _timerText: {fileID: 8203191613525578549}
   _resetButton: {fileID: 7124037680109668474}
---- !u!114 &7860990138334064566
+--- !u!114 &5159169737057974367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -905,7 +905,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 8941389377958070899, guid: 5e993484151cb464b9fb1f9507986f16, type: 3}
   distanceFromCamera: 0.5
   timeOut: 0
---- !u!114 &6653740029865079219
+--- !u!114 &7200491646157244293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
