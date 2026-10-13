@@ -32,6 +32,8 @@ public class ScoreHandler : MonoBehaviour
     private float timeRemaining = 70f;
     private bool timerPaused = true;
 
+    [SerializeField] private ParticleSystem _onScoreParticles;
+
     private void OnEnable()
     {
         UIHandler.ResetGame += OnReset;
@@ -89,6 +91,8 @@ public class ScoreHandler : MonoBehaviour
 
             //Call the event with the updated value
             EventHandler.ScoreUpdated(_currentScore);
+
+            _onScoreParticles.Play();
         }
     }
 
