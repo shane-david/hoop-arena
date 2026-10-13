@@ -29,7 +29,7 @@ public class ScoreHandler : MonoBehaviour
     [SerializeField] private TextMeshPro timerText;
 
     //Time section
-    private float timeRemaining = 120f;
+    private float timeRemaining = 70f;
     private bool timerPaused = true;
 
     private void OnEnable()
@@ -83,6 +83,10 @@ public class ScoreHandler : MonoBehaviour
         if (collision.gameObject.GetComponent<BasketBallHandler>())
         {
             _currentScore += _currentScoreAddition;
+
+            // call this event to display the score to screen
+            EventHandler.ScoreAmountDetermined(_currentScoreAddition);
+
             //Call the event with the updated value
             EventHandler.ScoreUpdated(_currentScore);
         }
@@ -106,6 +110,7 @@ public class ScoreHandler : MonoBehaviour
     {
         //reset the score to 0
         _currentScore = 0;
+        UpdateScore(_currentScore);
 
         //reset to 70 seconds
         timeRemaining = 70f;
