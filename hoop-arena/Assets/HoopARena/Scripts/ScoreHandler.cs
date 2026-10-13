@@ -186,7 +186,7 @@ public class ScoreHandler : MonoBehaviour
         //If the streak amount is greater than 3, double the added score
         if (_streakTotal > 3)
         {
-            TriggerFireParticles();
+            TriggerFireParticles(true);
             return _currentScoreAddition * 2;
         }
         //Otherwise, return the original score.
@@ -198,11 +198,26 @@ public class ScoreHandler : MonoBehaviour
         _streakTotal = 0;
     }
 
-    private void TriggerFireParticles()
+    private void TriggerFireParticles(bool state)
     {
-        foreach (ParticleSystem ps in _fireParticles)
+        //true is activate, false is deactivate. 
+        bool active = _fireParticles[0].isPlaying;
+
+        if (!active && !state) return;
+
+        if (state == true)
         {
-            ps.Play();
+            foreach (ParticleSystem ps in _fireParticles)
+            {
+                ps.Play();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem ps in _fireParticles)
+            {
+                ps.Stop();
+            }
         }
     }
 }
