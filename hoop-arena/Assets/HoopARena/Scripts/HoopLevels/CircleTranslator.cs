@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CircleTranslator : MonoBehaviour
+public class CircleTranslator : MonoBehaviour, IHoopLevel
 {
     [Header("Movement Data")]
     [SerializeField] private float _speed;
@@ -8,7 +8,7 @@ public class CircleTranslator : MonoBehaviour
     private float _angle; // keep track of time in order to use it with circle formula
 
     // translate the hoop in a circle
-    void Update()
+    public void Move()
     {   
         // make sure the parent anchor exists
         if (transform.parent == null) return; 
@@ -23,6 +23,5 @@ public class CircleTranslator : MonoBehaviour
         // apply the changes
         Vector3 centerPos = transform.parent.position; 
         transform.position = new Vector3(transform.position.x, centerPos.y + offsetY, centerPos.z + offsetZ); 
-
     }
 }

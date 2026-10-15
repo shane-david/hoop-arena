@@ -6,10 +6,15 @@ using UnityEngine.XR.ARSubsystems;
 public class MarkerlessPlacementHandler : MonoBehaviour
 {   
     // References
+    [Header("References")]
     [SerializeField] private ARRaycastManager raycastManager;
     [SerializeField] private ARPlaneManager planeManager;
     [SerializeField] private ARAnchorManager anchorManager;
     [SerializeField] private GameObject prefabObject;
+
+    [Header("Spawn Data")]
+    [SerializeField] private float wallOfset = 0.05f; 
+
 
     // keep track of the AR hits
     private static List<ARRaycastHit> hits = new();
@@ -40,7 +45,8 @@ public class MarkerlessPlacementHandler : MonoBehaviour
 
             if (anchor == null) return;
 
-            spawnedObject = Instantiate(prefabObject, hit.pose.position, hit.pose.rotation, anchor.transform);
+            spawnedObject = Instantiate(prefabObject, anchor.transform);
+            spawnedObject.transform.localPosition = Vector3.up * wallOfset; 
             spawnedObject.transform.localRotation = Quaternion.Euler(-90, 0, 90);
 
             HidePlanes();
@@ -49,12 +55,18 @@ public class MarkerlessPlacementHandler : MonoBehaviour
     }
 
     private void HidePlanes()
-    {
+    {   
+        // disable the plane manager
         planeManager.enabled = false;
 
         foreach (var plane in planeManager.trackables)
-        {
-            plane.gameObject.SetActive(false);
+        {   
+            // hide the mesh visualizers 
+            if (plane.TryGetComponent(out ARPlaneMeshVisualizer vis)) vis.enabled = false; 
+
+            // hide the renderers
+            if (plane.TryGetComponent(out MeshRenderer mr)) mr.enabled = false;
+            if (plane.TryGetComponent(out LineRenderer lr)) lr.enabled = false; 
         }
     }
 }

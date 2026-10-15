@@ -83,6 +83,9 @@ public class ScoreHandler : MonoBehaviour
 
             _currentScore += _currentScoreAddition;
 
+            // tell the level changer there was a score
+            EventHandler.InvokeScore(); 
+
             // call this event to display the score to screen
             EventHandler.ScoreAmountDetermined(_currentScoreAddition);
 

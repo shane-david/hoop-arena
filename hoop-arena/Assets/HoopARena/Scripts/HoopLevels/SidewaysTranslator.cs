@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SidewaysTranslator : MonoBehaviour
+public class SidewaysTranslator : MonoBehaviour, IHoopLevel
 {
     [Header("Movement Data")]
     [SerializeField] private float _speed;
@@ -25,7 +25,7 @@ public class SidewaysTranslator : MonoBehaviour
     }
 
     // translate the hoop back and forth 
-    void Update()
+    public void Move()
     {
         float offset = Mathf.Sin(Time.time * _speed) * _distance; 
         transform.position = _startPosition + _direction.normalized * offset; 

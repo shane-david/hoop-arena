@@ -2591,7 +2591,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608570829126686068}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 74d2a01a158ca8a43833741260dcc50f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5293,7 +5293,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2958078533688385228}
-  - component: {fileID: -6089972743616077300}
+  - component: {fileID: 4245128222922802574}
+  - component: {fileID: 7659502663289880803}
+  - component: {fileID: 2259469714190118132}
+  - component: {fileID: 2919317539519293738}
   m_Layer: 0
   m_Name: basketballNet
   m_TagString: Untagged
@@ -5319,7 +5322,36 @@ Transform:
   - {fileID: 2077102247171561707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6089972743616077300
+--- !u!114 &4245128222922802574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935778522622983565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4922f9ef8b0e0d4395da75146bf2dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircleTranslator
+  _speed: 1
+  _radius: 0.4
+--- !u!114 &7659502663289880803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935778522622983565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa51de39c766dd846ba5c0bf8e5847d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SidewaysTranslator
+  _speed: 1
+  _distance: 1
+  _movementType: 1
+--- !u!114 &2259469714190118132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5331,7 +5363,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2bf1a0ac716be428abeae2dc343775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rotator
-  _speed: 45
+  _speed: 50
+  _movementType: 0
+--- !u!114 &2919317539519293738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935778522622983565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c508901ab176524dbc23251b4d78355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoopLevelChanger
 --- !u!1 &5023560705794622838
 GameObject:
   m_ObjectHideFlags: 0

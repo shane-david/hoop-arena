@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class Rotator : MonoBehaviour, IHoopLevel
 {
     [Header("Movement Data")]
     [SerializeField] private float _speed;
@@ -25,7 +25,7 @@ public class Rotator : MonoBehaviour
     }
 
     // rotate the hoop in a circle 
-    void Update()
+    public void Move()
     {   
         transform.RotateAround(transform.parent.position, _direction, _speed*Time.deltaTime); 
     }
