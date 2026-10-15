@@ -11,17 +11,22 @@ public class SidewaysTranslator : MonoBehaviour, IHoopLevel
     private Vector3 _direction; 
     private Vector3 _startPosition; 
 
-    // get hte position of the hoop when it is instantiated 
+    // get the position of the hoop when it is instantiated     
     void Start()
-    {
+    {   
+        // get the start position 
         _startPosition = transform.position; 
-        if (_movementType == MovementType.upAndDown)
-        {
-            _direction = Vector3.up; 
-        } else
-        {
-            _direction = Vector3.forward; 
-        }
+
+        // get directions according to the wall instead of the world 
+        Vector3 wallNormal = transform.parent.up; 
+        Vector3 wallHor = Vector3.Cross(Vector3.up, wallNormal).normalized; 
+        Vector3 wallVert = Vector3.Cross(wallNormal, wallHor).normalized; 
+
+        // get this in regards to the world direction 
+        Vector3 worldDirection = (_movementType == MovementType.upAndDown) ? wallVert : wallHor; 
+
+        // convert the local space so movement stays attached to the anchor
+        _direction = transform.parent.InverseTransformDirection(worldDirection); 
     }
 
     // translate the hoop back and forth 

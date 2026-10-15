@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/HoopARena/Scenes/MainMenu.unity
     guid: aa1ff361c02229840a07793176854fd9
   - enabled: 1
+    path: Assets/HoopARena/Scenes/MakerlessDemoScene.unity
+    guid: e149556007779ee47b449dcda183b681
+  - enabled: 0
     path: Assets/HoopARena/Scenes/Game.unity
     guid: ee4d574ee8c351741be1098bdaeeeced
   m_configObjects:

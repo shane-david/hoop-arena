@@ -45,12 +45,15 @@ public class MarkerlessPlacementHandler : MonoBehaviour
 
             if (anchor == null) return;
 
-            spawnedObject = Instantiate(prefabObject, anchor.transform);
+            var surfaceNormal = hit.pose.rotation * Vector3.up; 
+            var placementRotation = Quaternion.LookRotation(surfaceNormal, Vector3.up); 
+
+            spawnedObject = Instantiate(prefabObject, anchor.transform.position, placementRotation, anchor.transform);  
             spawnedObject.transform.localPosition = Vector3.up * wallOfset; 
-            spawnedObject.transform.localRotation = Quaternion.Euler(-90, 0, 90);
+            spawnedObject.GetComponent<HoopLevelChanger>().CapturePose(); 
+
 
             HidePlanes();
-
         }
     }
 

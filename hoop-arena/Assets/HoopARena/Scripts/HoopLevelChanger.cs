@@ -12,6 +12,8 @@ public class HoopLevelChanger : MonoBehaviour
 
     // keeping track 
     private int _currentType; 
+    private Vector3 _spawnLocalPos;
+    private Quaternion _spawnLocalRot; 
  
     private void Awake()
     {
@@ -41,11 +43,18 @@ public class HoopLevelChanger : MonoBehaviour
         _levels[_currentType].Move();
     }
 
+    public void CapturePose()
+    {
+        // keep track of spawn
+        _spawnLocalPos = transform.localPosition;
+        _spawnLocalRot = transform.localRotation; 
+    }
+
     private void ChangeLevel()
     {   
         // reset to start transform 
-        this.gameObject.transform.localPosition = Vector3.up * 0.2f; 
-        this.gameObject.transform.localRotation = Quaternion.Euler(-90, 0, 90);
+        transform.localPosition = _spawnLocalPos;
+        transform.localRotation = _spawnLocalRot; 
 
         // determine new level
         _currentType = Random.Range(0, _levels.Count+1); 

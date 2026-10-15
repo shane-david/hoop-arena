@@ -20,7 +20,7 @@ public class MainMenuHandler : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("MakerlessDemoScene");
         }
         #else
         // Touch.activeTouches is a list of all active touches on the screen
@@ -33,7 +33,7 @@ public class MainMenuHandler : MonoBehaviour
         // if the touch just began, we load the game scene
         if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("MakerlessDemoScene");
         }
         #endif
     }
