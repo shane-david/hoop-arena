@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1643499673316672237}
   - component: {fileID: 3340099336741484101}
   m_Layer: 0
-  m_Name: Particle System (2)
+  m_Name: ps.Fire_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 981233085801758166}
   - component: {fileID: 1757326115128232071}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: ps.Fire_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5420,7 +5420,7 @@ GameObject:
   - component: {fileID: 7998502041234862993}
   - component: {fileID: 6952394559791170628}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: ps.Fire_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

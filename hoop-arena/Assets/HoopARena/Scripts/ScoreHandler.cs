@@ -196,6 +196,7 @@ public class ScoreHandler : MonoBehaviour
     private void ResetStreak()
     {
         _streakTotal = 0;
+        TriggerFireParticles(false);
     }
 
     private void TriggerFireParticles(bool state)
