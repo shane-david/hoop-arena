@@ -10,6 +10,7 @@ public class TouchInputHandler : MonoBehaviour
     public static event Action<Vector2> OnTouchBegan;
     public static event Action<Vector2> OnTouchMoved;
     public static event Action<Vector2> OnTouchEnded;
+    public static event Action<Vector2> OnTouchedScreen; 
 
     void OnEnable() => EnhancedTouchSupport.Enable();
     void OnDisable() => EnhancedTouchSupport.Disable();
@@ -35,6 +36,8 @@ public class TouchInputHandler : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Debug.Log("Input Began");
+            // broadcast the generic screen touched event
+            OnTouchedScreen?.Invoke(mousePosition); 
             OnTouchBegan?.Invoke(mousePosition);
         }
 
@@ -56,6 +59,9 @@ public class TouchInputHandler : MonoBehaviour
             return;
 
         Touch touch = Touch.activeTouches[0];
+
+        // broadcast the generic screen touched event
+        OnTouchedScreen?.Invoke(touch.screenPosition); 
 
         switch (touch.phase)
         {

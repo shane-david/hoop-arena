@@ -14,11 +14,13 @@ public class ScoreHandler : MonoBehaviour
     public float BaseScoreAddition = 1f;
     public float ScoreMultiplier = 3f;
 
-    // variable for current score
+    // variable for current score multiplier based on distance
     private int _currentScoreAddition;
 
     // the player's actual score 
     private int _currentScore;
+
+    private int _streakTotal;
 
     //This event will be called when this object is created
     //The UI handler will be listening for this event to get 
@@ -34,39 +36,29 @@ public class ScoreHandler : MonoBehaviour
 
     [SerializeField] private ParticleSystem _onScoreParticles;
 
+    [SerializeField] private ParticleSystem[] _fireParticles;
+
+    public static Action OnGameStart;
+
     private void OnEnable()
     {
         UIHandler.ResetGame += OnReset;
         EventHandler.OnScoreUpdated += UpdateScore;
+        ScoreHandler.OnGameStart += GameStart;
+        BasketBallHandler.WhenDestroyed += ResetStreak;
     }
 
     private void OnDisable()
     {
         UIHandler.ResetGame -= OnReset;
         EventHandler.OnScoreUpdated -= UpdateScore;
+        ScoreHandler.OnGameStart -= GameStart;
+        BasketBallHandler.WhenDestroyed -= ResetStreak;
     }
 
     private void Start()
     {
-        if (_arCamera == null)
-        {
-            _arCamera = Camera.main;
-        }
-
-        if (scoreText == null)
-        {
-            scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshPro>();
-        }
-
-        if (timerText == null)
-        {
-            timerText = GameObject.Find("TimerText").GetComponent<TextMeshPro>();
-        }
-
-        _currentScore = 0;
-        EventHandler.ScoreUpdated(_currentScore);
-
-        timerPaused = false;
+        OnGameStart?.Invoke();
     }
 
     private void Update()
@@ -84,7 +76,15 @@ public class ScoreHandler : MonoBehaviour
         //if the collided object has the basketballhandler script, score a point
         if (collision.gameObject.GetComponent<BasketBallHandler>())
         {
+            //add 1 to the total streak value
+            _streakTotal += 1;
+
+            _currentScoreAddition = ScoreStreak();
+
             _currentScore += _currentScoreAddition;
+
+            // tell the level changer there was a score
+            EventHandler.InvokeScore(); 
 
             // call this event to display the score to screen
             EventHandler.ScoreAmountDetermined(_currentScoreAddition);
@@ -92,7 +92,11 @@ public class ScoreHandler : MonoBehaviour
             //Call the event with the updated value
             EventHandler.ScoreUpdated(_currentScore);
 
+            //Play a one shot of the particles
             _onScoreParticles.Play();
+
+            //Destroy the basket ball
+            Destroy(collision.gameObject);
         }
     }
 
@@ -107,9 +111,10 @@ public class ScoreHandler : MonoBehaviour
         // set score based on distance 
         float unrounded = BaseScoreAddition * Mathf.Pow(distance, ScoreMultiplier);
         _currentScoreAddition = Mathf.RoundToInt(unrounded);
-        Debug.Log(_currentScoreAddition);
+        //Debug.Log(_currentScoreAddition);
     }
 
+    #region UI region
     private void OnReset()
     {
         //reset the score to 0
@@ -152,5 +157,70 @@ public class ScoreHandler : MonoBehaviour
     {
         //Timer paused is now equal to the opposite state
         timerPaused = !timerPaused;
+    }
+    #endregion
+    public void GameStart()
+    {
+        if (_arCamera == null)
+        {
+            _arCamera = Camera.main;
+        }
+
+        if (scoreText == null)
+        {
+            scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshPro>();
+        }
+
+        if (timerText == null)
+        {
+            timerText = GameObject.Find("TimerText").GetComponent<TextMeshPro>();
+        }
+
+        timeRemaining = 70f;
+
+        _currentScore = 0;
+        EventHandler.ScoreUpdated(_currentScore);
+
+        timerPaused = false;
+    }
+
+    private int ScoreStreak()
+    {
+        //If the streak amount is greater than 3, double the added score
+        if (_streakTotal > 3)
+        {
+            TriggerFireParticles(true);
+            return _currentScoreAddition * 2;
+        }
+        //Otherwise, return the original score.
+        return _currentScoreAddition;
+    }
+
+    private void ResetStreak()
+    {
+        _streakTotal = 0;
+    }
+
+    private void TriggerFireParticles(bool state)
+    {
+        //true is activate, false is deactivate. 
+        bool active = _fireParticles[0].isPlaying;
+
+        if (!active && !state) return;
+
+        if (state == true)
+        {
+            foreach (ParticleSystem ps in _fireParticles)
+            {
+                ps.Play();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem ps in _fireParticles)
+            {
+                ps.Stop();
+            }
+        }
     }
 }
