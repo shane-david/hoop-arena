@@ -224,4 +224,9 @@ public class ScoreHandler : MonoBehaviour
             }
         }
     }
+
+    private void PlaySound(AudioClip audio)
+    {
+        audio();
+    }
 }
