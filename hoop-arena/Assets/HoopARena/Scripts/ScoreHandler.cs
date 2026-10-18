@@ -40,6 +40,12 @@ public class ScoreHandler : MonoBehaviour
 
     public static Action OnGameStart;
 
+    //Audio section
+    [SerializeField] private AudioSource _audioSource;
+
+    [SerializeField] private AudioClip _clappingsfx;
+    [SerializeField] private AudioClip _endGameBuzsfx;
+
     private void OnEnable()
     {
         UIHandler.ResetGame += OnReset;
@@ -141,6 +147,7 @@ public class ScoreHandler : MonoBehaviour
 
             //Stop the player shooting
             EventHandler.StopPlayerShooting();
+            PlaySound(_endGameBuzsfx);
 
             timerText.text = "0:00";
             return;
@@ -190,6 +197,7 @@ public class ScoreHandler : MonoBehaviour
         if (_streakTotal > 3)
         {
             TriggerFireParticles(true);
+            PlaySound(_clappingsfx);
             return _currentScoreAddition * 2;
         }
         //Otherwise, return the original score.
@@ -199,6 +207,7 @@ public class ScoreHandler : MonoBehaviour
     private void ResetStreak()
     {
         _streakTotal = 0;
+        TriggerFireParticles(false);
     }
 
     private void TriggerFireParticles(bool state)
@@ -222,5 +231,10 @@ public class ScoreHandler : MonoBehaviour
                 ps.Stop();
             }
         }
+    }
+
+    private void PlaySound(AudioClip audio)
+    {
+        _audioSource.PlayOneShot(audio);
     }
 }
