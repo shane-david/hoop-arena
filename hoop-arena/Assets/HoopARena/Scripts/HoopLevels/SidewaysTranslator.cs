@@ -8,14 +8,14 @@ public class SidewaysTranslator : MonoBehaviour, IHoopLevel
     [SerializeField] private MovementType _movementType; 
 
 
-    private Vector3 _direction; 
+    private Vector3 _startDirection; 
     private Vector3 _startPosition; 
 
     // get the position of the hoop when it is instantiated     
     void Start()
     {   
         // get the start position 
-        _startPosition = transform.position; 
+        _startPosition = transform.localPosition; 
 
         // get directions according to the wall instead of the world 
         Vector3 wallNormal = transform.parent.up; 
@@ -26,13 +26,13 @@ public class SidewaysTranslator : MonoBehaviour, IHoopLevel
         Vector3 worldDirection = (_movementType == MovementType.upAndDown) ? wallVert : wallHor; 
 
         // convert the local space so movement stays attached to the anchor
-        _direction = transform.parent.InverseTransformDirection(worldDirection); 
+        _startDirection = transform.parent.InverseTransformDirection(worldDirection); 
     }
 
     // translate the hoop back and forth 
     public void Move()
     {
         float offset = Mathf.Sin(Time.time * _speed) * _distance; 
-        transform.position = _startPosition + _direction.normalized * offset; 
+        transform.localPosition = _startPosition + _startDirection.normalized * offset; 
     }
 }
