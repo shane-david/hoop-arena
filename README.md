@@ -2,9 +2,6 @@
 ## Overview
 Hoop ARena is a markerless AR experience developed for GDD3210 AR/VR Programming at UCCS. It is an AR basketball game where the play scans their area to establish planes and then can instantiate a basketball hoop on any wall. The player then has a limited amount of time to score as many times as possible while the basketball hoop moves around in different ways after every score. 
 
-## Demo 
-< link to video after submission>
-
 ## Features
 - AR Markerless plane instantiation
 - AR Markerless object instantiation 
@@ -23,7 +20,17 @@ Hoop ARena is a markerless AR experience developed for GDD3210 AR/VR Programming
 **This .apk build for this project runs on physical android devices only** It can however be tested in a simulated environment in the Unity Editor. 
 
 ## Installation 
-<fill in after release> 
+### Requirements
+- An Android mobile device that supports ARCore
+- Android 7.0+
+- Google Play Services for Ar
+
+### Steps
+1. Download the APK on you Android device from the [Release page](https://github.com/shane-david/hoop-arena/releases/tag/v1.0.0)
+2. Allow installs from you browser or file manager
+3. Open the downloaded APK and tap Install
+4. Launch the Game
+5. Play
 
 ## Technical Overview
 Hoop ARena is built on the AR Foundation Unity Template. It uses several systems from within this template to detect and place planes when scanned and detected, and to instantiate objects on those planes. 
