@@ -5449,7 +5449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa51de39c766dd846ba5c0bf8e5847d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SidewaysTranslator
-  _speed: 1
+  _speed: 0.5
   _distance: 1
   _movementType: 1
 --- !u!114 &2259469714190118132
