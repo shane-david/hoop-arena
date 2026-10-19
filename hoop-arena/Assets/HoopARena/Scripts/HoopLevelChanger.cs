@@ -30,8 +30,14 @@ public class HoopLevelChanger : MonoBehaviour
     }
 
     // subscribe and unsubscribe to the score event
-    private void OnEnable() => EventHandler.OnScore += ChangeLevel;
-    private void OnDisable() => EventHandler.OnScore -= ChangeLevel;
+    private void OnEnable() {
+        EventHandler.OnScore += ChangeLevel;
+        UIHandler.ResetGame += ResetHoop;
+    }
+    private void OnDisable() {
+        EventHandler.OnScore -= ChangeLevel;
+        UIHandler.ResetGame -= ResetHoop;
+    }
 
     // do movement logic
     private void Update()
@@ -59,5 +65,15 @@ public class HoopLevelChanger : MonoBehaviour
         // determine new level
         _currentType = Random.Range(0, _levels.Count+1); 
         Debug.Log($"Changed level to level {_currentType}");
+    }
+
+    private void ResetHoop()
+    {
+        // stop whatever level is running 
+        _currentType = _levels.Count; 
+
+        // reset the transfrom 
+        transform.localPosition = _spawnLocalPos;
+        transform.localRotation = _spawnLocalRot; 
     }
 }

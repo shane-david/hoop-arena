@@ -7,6 +7,7 @@ public static class EventHandler
     public static event Action<int> OnScoreAmountDetermined; 
     public static event Action OnStopPlayerShooting;
     public static event Action OnScore; 
+    public static event Action OnWallDetected; 
     
     public static void InvokeScore()
     {
@@ -27,5 +28,10 @@ public static class EventHandler
     {
         Debug.Log("Invoking Stopshooting");
         OnStopPlayerShooting?.Invoke();
+    }
+
+    public static void InvokeWallDetected()
+    {
+        OnWallDetected?.Invoke(); 
     }
 }

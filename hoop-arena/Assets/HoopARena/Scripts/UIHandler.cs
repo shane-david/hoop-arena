@@ -18,31 +18,40 @@ public class UIHandler : MonoBehaviour
     //Time section
     private float timeRemaining = 120f;
     private bool timerPaused = true;
+    private bool gameRunning = true; 
 
     private void OnEnable()
     {
         EventHandler.OnStopPlayerShooting += ShowButton;
         ScoreHandler.OnGameStart += GameStart;
+        EventHandler.OnWallDetected += WallScanned; 
+        TouchInputHandler.OnTouchedScreen += OnResetGame;
     }
 
     private void OnDisable()
     {
         EventHandler.OnStopPlayerShooting -= ShowButton;
         ScoreHandler.OnGameStart -= GameStart;
-
+        EventHandler.OnWallDetected -= WallScanned; 
+        TouchInputHandler.OnTouchedScreen -= OnResetGame;
     }
 
 
     #region methods
     public void ShowButton()
     {
-        _resetButton.gameObject.SetActive(true);
+        _scanAreaPrompt.gameObject.SetActive(true); 
+        _scanAreaPrompt.text = "Tap to Reset!"; 
+        gameRunning = false; 
     }
 
-    public void OnResetGame()
+    public void OnResetGame(Vector2 pos)
     {
-        _resetButton.gameObject.SetActive(false);
-        ResetGame?.Invoke();
+        if (!gameRunning)
+        {
+            ResetGame?.Invoke(); 
+            GameStart(); 
+        }
     }
 
     public void GameStart()
@@ -52,6 +61,14 @@ public class UIHandler : MonoBehaviour
         {
             _scanAreaPrompt.gameObject.SetActive(false);
         }
+        gameRunning = true; 
     }
+
+    // if a wall has been scanned change the prompt 
+    private void WallScanned()
+    {
+        _scanAreaPrompt.text = "Tap the wall to begin!"; 
+    }
+
     #endregion
 }
