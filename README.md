@@ -2,6 +2,9 @@
 ## Overview
 Hoop ARena is a markerless AR experience developed for GDD3210 AR/VR Programming at UCCS. It is an AR basketball game where the play scans their area to establish planes and then can instantiate a basketball hoop on any wall. The player then has a limited amount of time to score as many times as possible while the basketball hoop moves around in different ways after every score. 
 
+## Demo Video
+[Click here to watch video!](https://www.youtube.com/watch?v=YrvKOJhuTHY)
+
 ## Features
 - AR Markerless plane instantiation
 - AR Markerless object instantiation 
