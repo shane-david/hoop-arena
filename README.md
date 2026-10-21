@@ -19,7 +19,7 @@ Hoop ARena is a markerless AR experience developed for GDD3210 AR/VR Programming
 2. Click a wall to instantiate the hoop.
 3. Tap the screen to spawn a ball and swipe to shoot it. 
 
-## Platfrom Requirements
+## Platform Requirements
 **This .apk build for this project runs on physical android devices only** It can however be tested in a simulated environment in the Unity Editor. 
 
 ## Installation 
